@@ -1,15 +1,19 @@
 import mysql.connector
+import os
+from dotenv import load_dotenv
+import mysql.connector
+
+load_dotenv()
 
 try:
     # 1. Connect to your local MySQL server
-    # (Leaving password blank by default, change if your local server has one!)
     conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="Vijichandru&17" 
-    )
+    host=os.getenv("DB_HOST"),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD")
+)
     cursor = conn.cursor()
-    print("🔌 Connected to MySQL Server successfully!")
+    print(" Connected to MySQL Server successfully!")
 
     # 2. Create the database if it doesn't exist
     cursor.execute("CREATE DATABASE IF NOT EXISTS marketing_roi_db")
